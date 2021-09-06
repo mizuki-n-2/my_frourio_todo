@@ -1,14 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "mysql"
   url      = env("API_DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String @db.VarChar(256)
+  email    String @unique @db.VarChar(256)
+  password String @db.VarChar(256)
+  Task     Task[]
+
+  @@map("user")
+}
+
+enum TaskStatus {
+  TODO
+  DOING
+  DONE
 }
 
 model Task {
-  id    Int     @id @default(autoincrement())
-  label String
-  done  Boolean @default(false)
+  id          Int         @id @default(autoincrement())
+  userId     Int @map("user_id")
+  title       String      @db.VarChar(256)
+  status      TaskStatus
+  createdAt  DateTime    @default(now()) @db.DateTime(0) @map("created_at")
+  updatedAt  DateTime    @default(now()) @db.DateTime(0) @map("updated_at")
+  finishedAt DateTime?   @db.DateTime(0) @map("finished_at")
+  User        User        @relation(fields: [userId], references: [id])
+
+  @@index([userId], name: "user_id")
+  @@map("task")
 }

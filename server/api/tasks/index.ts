@@ -1,16 +1,21 @@
-import type { Task } from '$prisma/client'
+import type { Task, TaskStatus } from '$prisma/client'
+
+export interface CreateTaskRequest {
+  userId: number
+  title: string
+  status: TaskStatus
+}
 
 export type Methods = {
   get: {
-    query?: {
-      limit?: number
-      message?: string
+    query: {
+      userId: number
     }
 
     resBody: Task[]
   }
   post: {
-    reqBody: Pick<Task, 'label'>
+    reqBody: CreateTaskRequest
     resBody: Task
   }
 }
