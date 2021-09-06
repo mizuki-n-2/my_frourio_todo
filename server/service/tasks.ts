@@ -5,13 +5,13 @@ import { CreateTaskRequest } from '$/api/tasks'
 const prisma = new PrismaClient()
 
 export const getTasks = 
-  async (user_id: number) =>
-    await prisma.task.findMany({ where: { user_id } })
+  async (userId: number) =>
+    await prisma.task.findMany({ where: { userId } })
 
 export const createTask = (body: CreateTaskRequest) =>
   prisma.task.create({
     data: {
-      user_id: body.user_id,
+      userId: body.userId,
       title: body.title,
       status: body.status
     }
