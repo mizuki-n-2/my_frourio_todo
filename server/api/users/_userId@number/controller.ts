@@ -14,7 +14,7 @@ export default defineController({ getUserById }, ({ getUserById }) => ({
       if (e instanceof UserNotFound) {
         return {
           status: 404,
-          body: `user not found by id: ${params.userId}}`
+          body: `user not found by id: ${params.userId}`
         }
       }
 

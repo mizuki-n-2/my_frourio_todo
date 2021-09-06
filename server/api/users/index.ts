@@ -1,5 +1,8 @@
+import { CreateUserRequest } from "$/types";
+
 export type Methods = {
-  get: {
-    resBody: string
+  post: {
+    reqBody: CreateUserRequest
+    resBody: number
   }
 }
