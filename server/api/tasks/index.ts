@@ -1,4 +1,10 @@
-import type { Task } from '$prisma/client'
+import type { Task, Task_status } from '$prisma/client'
+
+export interface CreateTaskRequest {
+  user_id: number
+  title: string
+  status: Task_status
+}
 
 export type Methods = {
   get: {
@@ -9,7 +15,7 @@ export type Methods = {
     resBody: Task[]
   }
   post: {
-    // reqBody: Pick<Task, 'label'>
+    reqBody: CreateTaskRequest
     resBody: Task
   }
 }

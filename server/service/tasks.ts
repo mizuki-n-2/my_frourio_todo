@@ -1,6 +1,6 @@
-import { depend } from 'velona'
 import { PrismaClient } from '@prisma/client'
 import type { Task, Prisma } from '$prisma/client'
+import { CreateTaskRequest } from '$/api/tasks'
 
 const prisma = new PrismaClient()
 
@@ -8,8 +8,14 @@ export const getTasks =
   async (user_id: number) =>
     await prisma.task.findMany({ where: { user_id } })
 
-export const createTask = (label: Task['label']) =>
-  prisma.task.create({ data: { label } })
+export const createTask = (body: CreateTaskRequest) =>
+  prisma.task.create({
+    data: {
+      user_id: body.user_id,
+      title: body.title,
+      status: body.status
+    }
+  })
 
 export const updateTask = (
   id: Task['id'],
