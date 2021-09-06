@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
-import type { Task, Prisma } from '$prisma/client'
+import type { Task } from '$prisma/client'
 import { CreateTaskRequest } from '$/api/tasks'
 
 const prisma = new PrismaClient()
@@ -19,8 +19,8 @@ export const createTask = (body: CreateTaskRequest) =>
 
 export const updateTask = (
   id: Task['id'],
-  partialTask: Prisma.TaskUpdateInput
-) => prisma.task.update({ where: { id }, data: partialTask })
+  status: Task['status']
+) => prisma.task.update({ where: { id }, data: { status } })
 
 export const deleteTask = (id: Task['id']) =>
   prisma.task.delete({ where: { id } })
