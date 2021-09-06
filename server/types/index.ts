@@ -1,9 +1,13 @@
-export type UserInfo = {
-  id: string
+import { TaskStatus } from ".prisma/client"
+
+export type CreateUserRequest = {
   name: string
-  icon: string
+  email: string
+  password: string
 }
 
-export type AuthHeader = {
-  authorization: string
+export type CreateTaskRequest = {
+  userId: number
+  title: string
+  status: TaskStatus
 }
