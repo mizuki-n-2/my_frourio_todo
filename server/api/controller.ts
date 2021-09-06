@@ -1,5 +1,9 @@
 import { defineController } from './$relay'
+import { createUser } from '$/service/users'
 
 export default defineController(() => ({
-  get: () => ({ status: 200, body: 'Hello, world!' })
+  post: async ({ body }) => ({
+    status: 201,
+    body: (await createUser(body)).id
+  })
 }))

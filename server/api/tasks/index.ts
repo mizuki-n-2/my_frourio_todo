@@ -1,5 +1,5 @@
 import type { Task } from '$prisma/client'
-import type { CreateTaskRequest } from '../../types'  
+import type { CreateTaskRequest } from '$/types'  
  
 export type Methods = {
   get: {

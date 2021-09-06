@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import type { Task } from '$prisma/client'
-import { CreateTaskRequest } from '../types'
+import { CreateTaskRequest } from '$/types'
 
 const prisma = new PrismaClient()
 
