@@ -1,0 +1,284 @@
+openapi: 3.0.0
+info:
+  title: my_frourio_todo
+  description: API定義
+  version: '1.0'
+tags:
+  - name: user
+    description: ユーザー
+  - name: task
+    description: タスク
+paths:
+  /api/users:
+    post:
+      tags:
+        - user
+      summary: ユーザー作成
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        '201':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUserResponse'
+        '400':
+          description: リクエストの不正
+        '500':
+          description: 例外発生
+      
+  /api/users/{userId}:
+    get:
+      tags:
+        - user
+      summary: ユーザー取得
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+          description: ユーザーID
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: リクエストの不正
+        '401':
+          description: 認証エラー
+        '403':
+          description: アクセス禁止
+        '404':
+          description: ユーザーが存在しない
+        '500':
+          description: 例外発生
+
+  /api/tasks:
+    get:
+      tags:
+        - task
+      summary: タスク取得
+      description: 指定したユーザーのタスクを全件取得
+      parameters:
+        - name: userId
+          in: query
+          description: ユーザーID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TasksResponse'
+        '400':
+          description: リクエストの不正
+        '401':
+          description: 認証エラー
+        '403':
+          description: アクセス禁止
+        '500':
+          description: 例外発生
+    post:
+      tags:
+        - task
+      summary: タスク作成
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTaskRequest'
+      responses:
+        '201':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTaskResponse'
+        '400':
+          description: リクエストの不正
+        '401':
+          description: 認証エラー
+        '500':
+          description: 例外発生
+      
+  /api/tasks/{taskId}:
+    patch:
+      tags:
+        - task
+      summary: タスクのステータス変更
+      parameters:
+        - name: taskId
+          in: path
+          description: タスクID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTaskRequest'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTaskResponse'
+        '400':
+          description: リクエストの不正
+        '401':
+          description: 認証エラー
+        '403':
+          description: アクセス禁止
+        '404':
+          description: タスクが存在しない
+        '500':
+          description: 例外発生
+    delete:
+      tags:
+        - task
+      summary: タスク削除
+      parameters:
+        - name: taskId
+          in: path
+          description: タスクID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: 成功
+        '400':
+          description: リクエストの不正
+        '401':
+          description: 認証エラー
+        '403':
+          description: アクセス禁止
+        '404':
+          description: タスクが存在しない
+        '500':
+          description: 例外発生
+      
+components:
+  schemas:
+    CreateUserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password: 
+          type: string
+          format: password
+      required:
+        - name
+        - email
+        - password
+    CreateUserResponse:
+      type: object
+      properties:
+        userId:
+          type: integer
+      required:
+        - userId
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+      required:
+        - id
+        - name
+        - email
+        - password
+    TaskResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        title:
+          type: string
+        status:
+          type: string
+          enum: 
+            - TODO
+            - DOING
+            - DONE
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        finishedAt:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - id
+        - userId
+        - title
+        - status
+        - createdAt
+        - updatedAt
+        - finishedAt
+    TasksResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/TaskResponse'
+    CreateTaskRequest:
+      type: object
+      properties:
+        userId:
+          type: integer
+        title:
+          type: string
+        status:
+          type: string
+          enum: 
+            - TODO
+            - DOING
+            - DONE
+      required:
+        - userId
+        - title
+        - status
+    CreateTaskResponse:
+      $ref: '#/components/schemas/TaskResponse'
+    UpdateTaskRequest:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: 
+            - TODO
+            - DOING
+            - DONE
+      required:
+        - status
+    UpdateTaskResponse:
+      $ref: '#/components/schemas/TaskResponse'
