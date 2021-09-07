@@ -1,9 +1,9 @@
-import { MinLength } from 'class-validator'
+import { MinLength, IsEmail } from 'class-validator'
 
 export class LoginBody {
-  @MinLength(2)
-  id: string
+  @IsEmail()
+  email: string
 
-  @MinLength(4)
-  pass: string
+  @MinLength(8)
+  password: string
 }

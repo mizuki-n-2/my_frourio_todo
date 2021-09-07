@@ -1,5 +1,5 @@
 import { defineController } from './$relay'
-import { createUser } from '$/service/users'
+import { createUser } from '$/service/user'
 
 export default defineController(() => ({
   post: async ({ body }) => ({

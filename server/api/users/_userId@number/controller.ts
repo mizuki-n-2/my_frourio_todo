@@ -1,5 +1,5 @@
 import { defineController } from './$relay'
-import { getUserById, UserNotFound } from '$/service/users'
+import { getUserById, UserNotFound } from '$/service/user'
 
 export default defineController({ getUserById }, ({ getUserById }) => ({
   get: async ({ params }) => {
