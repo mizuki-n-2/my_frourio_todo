@@ -22,11 +22,12 @@ export const getUserById =
       }
     })
 
-    if (!user) {
-      throw new UserNotFound()
-    }
+    if (!user) throw new UserNotFound()
 
-    return user
+    return {
+      name: user.name,
+      email: user.email
+    }
   }
 
 export const createUser = (body: CreateUserRequest) =>

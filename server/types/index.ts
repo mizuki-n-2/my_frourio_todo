@@ -11,3 +11,12 @@ export type CreateTaskRequest = {
   title: string
   status: TaskStatus
 }
+
+export type AuthHeader = {
+  Authorization: string
+}
+
+export type UserInfo = {
+  name: string
+  email: string
+}
