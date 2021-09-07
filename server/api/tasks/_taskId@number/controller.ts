@@ -3,8 +3,8 @@ import { updateTask, deleteTask } from '$/service/tasks'
 
 export default defineController(() => ({
   patch: async ({ body, params }) => {
-    await updateTask(params.taskId, body.status)
-    return { status: 204 }
+    const task = await updateTask(params.taskId, body.status)
+    return { status: 200, body: task }
   },
   delete: async ({ params }) => {
     await deleteTask(params.taskId)
