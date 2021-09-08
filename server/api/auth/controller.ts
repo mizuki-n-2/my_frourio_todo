@@ -12,7 +12,6 @@ export default defineController(() => ({
         ? { status: 201, body: { token: jwt.sign({ userId }, process.env.JWT_SECRET ?? 'jwt-secret') } }
         : { status: 401 } 
     } catch (e) {
-      console.error(e)
       if (e instanceof UserNotFound)
         return { status: 404 }
       

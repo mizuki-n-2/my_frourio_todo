@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
-import { CreateUserRequest } from '$/types'
 import bcrypt from 'bcrypt' 
+import { CreateUserRequest } from '$/types'
 
 const prisma = new PrismaClient()
 
