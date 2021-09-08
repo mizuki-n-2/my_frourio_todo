@@ -1,8 +1,8 @@
-import { CreateUserRequest } from "$/types";
+import { RegisterBody } from "$/validators";
 
 export type Methods = {
   post: {
-    reqBody: CreateUserRequest
+    reqBody: RegisterBody
     resBody: {
       userId: number
     }
