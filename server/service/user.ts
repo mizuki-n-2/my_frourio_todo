@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { CreateUserRequest } from '$/types'
+import bcrypt from 'bcrypt' 
 
 const prisma = new PrismaClient()
 
@@ -30,13 +31,17 @@ export const getUserById =
     }
   }
 
-export const createUser = (body: CreateUserRequest) =>
-  prisma.user.create({
-    data: {
-      name: body.name,
-      email: body.email,
-      password: body.password
-    }
-  })
+const saltRounds = 10;
+
+export const createUser = (body: CreateUserRequest) => 
+  bcrypt.hash(body.password, saltRounds).then(function(hash) {
+      return prisma.user.create({
+        data: {
+          name: body.name,
+          email: body.email,
+          password: hash
+        }
+      })
+  });
 
 export class UserNotFound extends Error {}
