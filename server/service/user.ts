@@ -11,8 +11,9 @@ export const validateUser = async (email: string, password: string) => {
   
   if (!user) throw new UserNotFound()
   
-  // TODO: パスワードはハッシュにしてDBに保存予定なのでそこに合わせる
-  if (user.password === password) return user.id
+  const match = await bcrypt.compare(password, user.password);
+
+  if(match) return user.id
 }
 
 export const getUserById = 
