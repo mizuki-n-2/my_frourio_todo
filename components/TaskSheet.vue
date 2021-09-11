@@ -19,7 +19,7 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'TaskSheet',
   props: {
-    status: { type: String }
+    status: { default: '', type: String }
   }
 })
 </script>
