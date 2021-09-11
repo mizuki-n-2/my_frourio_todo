@@ -33,10 +33,15 @@
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-property-decorator'
-export default class Header extends Vue {
-  private links: Array<string> = [
-    'カンバンボード'
-  ]
-}
+import Vue from 'vue'
+export default Vue.extend({
+  name: 'Header',
+  data() {
+    return {
+      links: [
+        'カンバンボード'
+      ] 
+    };
+  }
+})
 </script>
