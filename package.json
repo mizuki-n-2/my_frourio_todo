@@ -50,8 +50,7 @@
     "frourio": "^0.25.1",
     "frourio-express": "^0.25.1",
     "nuxt": "^2.15.4",
-    "prisma": "^2.21.2",
-    "vue-property-decorator": "^9.1.2"
+    "prisma": "^2.21.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",
