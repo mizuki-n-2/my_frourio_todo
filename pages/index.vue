@@ -5,9 +5,10 @@
       <v-container>
         <v-row v-if="taskStatusList">
           <TaskSheet
-            v-for="(status, index) in taskStatusList"
+            v-for="(item, index) in taskStatusList"
             :key="index"
-            :status="status"
+            :status="item.status"
+            :color="item.color"
           ></TaskSheet>
         </v-row>
       </v-container>
@@ -28,9 +29,18 @@ export default Vue.extend({
   data() {
     return {
       taskStatusList: [
-        'TODO',
-        'DOING',
-        'DONE'
+        {
+          status: 'TODO',
+          color: 'red'
+        },
+        {
+          status: 'DOING',
+          color: 'green'
+        },
+        {
+          status: 'DONE',
+          color: 'black'
+        }
       ] 
     };
   }

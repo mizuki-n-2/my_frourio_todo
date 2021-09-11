@@ -3,12 +3,19 @@
     cols="12"
     sm="4"
   >
-    <h3>{{ status }}</h3>
     <v-sheet
-      min-height="80vh"
+      min-height="85vh"
       rounded="lg"
     >
-      <!--  -->
+    <div :class="`sheet-title bg-${color}`">
+      <div></div>
+      <h3>{{ status }}</h3>
+      <v-icon
+        color="white"
+      >
+        mdi-card-plus-outline
+      </v-icon>
+    </div>
     </v-sheet>
   </v-col>
 </template>
@@ -19,7 +26,31 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'TaskSheet',
   props: {
-    status: { default: '', type: String }
+    status: { default: '', type: String },
+    color: { default: '', type: String }
   }
 })
 </script>
+
+<style scoped>
+.sheet-title {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 8px;
+  height: 50px;
+  line-height: 50px;
+  color: white;
+}
+
+.bg-red {
+  background-color: red;
+}
+
+.bg-green {
+  background-color: green;
+}
+
+.bg-black {
+  background-color: black;
+}
+</style>
