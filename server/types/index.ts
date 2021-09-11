@@ -7,7 +7,6 @@ export type CreateUserRequest = {
 }
 
 export type CreateTaskRequest = {
-  userId: number
   title: string
   status: TaskStatus
 }
