@@ -7,28 +7,53 @@
       min-height="85vh"
       rounded="lg"
     >
-    <div :class="`sheet-title bg-${color}`">
-      <div></div>
-      <h3>{{ status }}</h3>
-      <v-icon
-        color="white"
-      >
-        mdi-card-plus-outline
-      </v-icon>
-    </div>
+      <div :class="`sheet-title bg-${color}`">
+        <div></div>
+        <h3>{{ status }}</h3>
+        <v-icon
+          color="white"
+        >
+          mdi-card-plus-outline
+        </v-icon>
+      </div>
+
+      <task-card
+        v-for="task in tasks"
+        :key="task.id"
+        :task="task"
+      ></task-card>
+
     </v-sheet>
   </v-col>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import TaskCard from './TaskCard.vue'
 
 export default Vue.extend({
   name: 'TaskSheet',
+  components: {
+    TaskCard
+  },
   props: {
-    status: { default: '', type: String },
-    color: { default: '', type: String }
-  }
+    status: { 
+      type: String,
+      default: 'TODO'
+    },
+    color: { 
+      type: String,
+      default: 'red'  
+    },
+    tasks: { 
+      type: Array,
+      default: () => ([{
+        id: 0,
+        title: '',
+        status: 'TODO'
+      }]) 
+    }
+  },
 })
 </script>
 

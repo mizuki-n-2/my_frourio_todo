@@ -4,12 +4,13 @@
     <v-main class="grey lighten-2">
       <v-container>
         <v-row v-if="taskStatusList">
-          <TaskSheet
+          <task-sheet
             v-for="(item, index) in taskStatusList"
             :key="index"
             :status="item.status"
             :color="item.color"
-          ></TaskSheet>
+            :tasks="filteredTasks(item.status)"
+          ></task-sheet>
         </v-row>
       </v-container>
     </v-main>
@@ -41,8 +42,30 @@ export default Vue.extend({
           status: 'DONE',
           color: 'black'
         }
-      ] 
+      ],
+      tasks: [
+        {
+          id: 1,
+          status: 'TODO',
+          title: 'wake up'
+        },
+        {
+          id: 2,
+          status: 'DOING',
+          title: 'breakfast'
+        },
+        {
+          id: 3,
+          status: 'DONE',
+          title: 'dinner'
+        },
+      ],
     };
+  },
+  methods: {
+    filteredTasks(status: string) {
+      return this.tasks.filter(task => task.status === status)
+    },
   }
 })
 </script>
