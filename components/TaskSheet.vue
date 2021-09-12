@@ -12,6 +12,7 @@
         <h3>{{ status }}</h3>
         <v-icon
           color="white"
+          @click="emitOpenDialog(status)"
         >
           mdi-card-plus-outline
         </v-icon>
@@ -54,6 +55,11 @@ export default Vue.extend({
       }]) 
     }
   },
+  methods: {
+    emitOpenDialog(status: string) {
+      this.$emit('openDialog', status)
+    }
+  }
 })
 </script>
 

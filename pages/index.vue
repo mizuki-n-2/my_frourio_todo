@@ -3,6 +3,13 @@
     <Header></Header>
     <v-main class="grey lighten-2">
       <v-container>
+        <Dialog 
+          v-if="dialog"
+          :dialog="dialog"
+          :status="dialogTaskStatus"
+          @closeDialog="closeDialog"
+          @addTask="addTask"
+        ></Dialog>
         <v-row v-if="taskStatusList">
           <task-sheet
             v-for="(item, index) in taskStatusList"
@@ -10,6 +17,7 @@
             :status="item.status"
             :color="item.color"
             :tasks="filteredTasks(item.status)"
+            @openDialog="openDialog"
           ></task-sheet>
         </v-row>
       </v-container>
@@ -21,14 +29,23 @@
 import Vue from 'vue'
 import Header from '../components/Header.vue'
 import TaskSheet from '../components/TaskSheet.vue'
+import Dialog from '../components/Dialog.vue'
+
+interface CreateTaskRequest {
+  title: string
+  status: 'TODO' | 'DOING' | 'DONE'
+}
 
 export default Vue.extend({
   components: {
     Header,
-    TaskSheet
+    TaskSheet,
+    Dialog
   },
   data() {
     return {
+      dialog: false,
+      dialogTaskStatus: 'TODO',
       taskStatusList: [
         {
           status: 'TODO',
@@ -59,13 +76,29 @@ export default Vue.extend({
           status: 'DONE',
           title: 'dinner'
         },
-      ],
+      ]
     };
   },
   methods: {
     filteredTasks(status: string) {
       return this.tasks.filter(task => task.status === status)
     },
+    addTask(task: CreateTaskRequest) {
+      this.closeDialog()
+
+      // 今後はAPI通信に変更
+      this.tasks.push({
+        id: new Date().getMilliseconds(),
+        ...task
+      })
+    },
+    openDialog(status: string) {
+      this.dialogTaskStatus = status
+      this.dialog = true
+    },
+    closeDialog() {
+      this.dialog = false
+    }
   }
 })
 </script>
