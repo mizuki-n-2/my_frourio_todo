@@ -87,6 +87,8 @@ export default Vue.extend({
       this.$emit('closeDialog')
     },
     emitAddTask() {
+      if(!this.title)
+        return window.alert("タスク名を入力してくだいさい。")
       const task = {
         title: this.title,
         status: this.selectedStatus
