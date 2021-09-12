@@ -18,6 +18,7 @@
             :color="item.color"
             :tasks="filteredTasks(item.status)"
             @openDialog="openDialog"
+            @deleteTask="deleteTask"
           ></task-sheet>
         </v-row>
       </v-container>
@@ -98,6 +99,10 @@ export default Vue.extend({
     },
     closeDialog() {
       this.dialog = false
+    },
+    deleteTask(id: number) {
+      // 今後はAPI通信に変更
+      this.tasks = this.tasks.filter(task => task.id !== id)
     }
   }
 })

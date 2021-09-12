@@ -22,6 +22,7 @@
         v-for="task in tasks"
         :key="task.id"
         :task="task"
+        @emitDeleteTask="emitDeleteTask"
       ></task-card>
 
     </v-sheet>
@@ -58,6 +59,9 @@ export default Vue.extend({
   methods: {
     emitOpenDialog(status: string) {
       this.$emit('openDialog', status)
+    },
+    emitDeleteTask(id: number) {
+      this.$emit('deleteTask', id)
     }
   }
 })

@@ -4,12 +4,20 @@
     max-width="344"
     outlined
   >
-    <v-list-item two-line>
+    <v-list-item>
       <v-list-item-content>
         <v-list-item-title class="text-h5">
           {{ task.title }}
         </v-list-item-title>
       </v-list-item-content>
+      <v-list-item-icon>
+        <v-icon 
+          large
+          @click="emitDeleteTask(task.id)"
+        >
+          mdi-delete-forever
+        </v-icon>
+      </v-list-item-icon>
     </v-list-item>
   </v-card>
 </template>
@@ -26,6 +34,11 @@ export default Vue.extend({
         title: '',
         status: 'TODO'
       })
+    }
+  },
+  methods: {
+    emitDeleteTask(id: number) {
+      this.$emit('emitDeleteTask', id)
     }
   }
 })
