@@ -12,6 +12,7 @@
     </v-icon>
 
     <v-tabs
+      v-if="isLogin"
       centered
       color="white"
     >
@@ -24,6 +25,7 @@
     </v-tabs>
 
     <v-icon
+      v-if="isLogin"
       color="white"
     >
       mdi-logout
@@ -36,6 +38,12 @@
 import Vue from 'vue'
 export default Vue.extend({
   name: 'Header',
+  props: {
+    isLogin: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       links: [
