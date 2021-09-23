@@ -68,11 +68,18 @@ export default Vue.extend({
     };
   },
   async mounted() {
-    this.tasks = await this.$api.tasks.$get({
-      headers: {
-        Authorization: `Bearer ${this.$store.getters.token}`
+    try {
+      this.tasks = await this.$api.tasks.$get({
+        headers: {
+          Authorization: `Bearer ${this.$store.getters.token}`
+        }
+      })
+    } catch (e) {
+      if(e.response.status === 401) {
+        window.alert("認証に失敗しました。\n再度ログインを行ってください。")
+        this.$router.push('/')
       }
-    })
+    }
   },
   methods: {
     filteredTasks(status: string) {
