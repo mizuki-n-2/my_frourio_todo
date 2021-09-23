@@ -1,7 +1,7 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex/types'
 
 export const state = () => ({
-  token: '' 
+  token: ''
 })
 
 export type RootState = ReturnType<typeof state>
@@ -11,7 +11,7 @@ export const getters: GetterTree<RootState, RootState> = {
 }
 
 export const mutations: MutationTree<RootState> = {
-  UPDATE_TOKEN: (state, newToken: string) => (state.token = newToken)
+  SET_TOKEN: (state, newToken: string) => (state.token = newToken)
 }
 
 export const actions: ActionTree<RootState, RootState> = {
@@ -22,7 +22,7 @@ export const actions: ActionTree<RootState, RootState> = {
         password: val.password
       }
     })
-    
-    commit('UPDATE_TOKEN', res.token)
+
+    commit('SET_TOKEN', res.token)
   }
 }
