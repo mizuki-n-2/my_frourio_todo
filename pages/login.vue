@@ -71,7 +71,7 @@ export default Vue.extend({
   },
   methods: {
     async login () {
-      if(!(this.$refs.form && this.$refs.form.validate())) return
+      if(!(this.$refs.form as Vue & { validate: () => boolean }).validate()) return
 
       try {
         const res = await this.$api.auth.$post({

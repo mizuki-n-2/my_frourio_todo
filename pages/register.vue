@@ -92,7 +92,7 @@ export default Vue.extend({
   },
   methods: {
     async registerUser () {
-      if(!(this.$refs.form && this.$refs.form.validate())) return
+      if(!(this.$refs.form as Vue & { validate: () => boolean }).validate()) return
 
       try {
         await this.$api.users.$post({
