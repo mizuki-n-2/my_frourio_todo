@@ -79,6 +79,8 @@ export default Vue.extend({
         if(e.response.status === 404)
           window.alert("該当するユーザが存在しません。\nメールアドレスまたはパスワードに間違いがないか確認してもう一度お試しください！")
       }
+
+      this.$router.push('/')
     }
   },
 })

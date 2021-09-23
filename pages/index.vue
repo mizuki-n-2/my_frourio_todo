@@ -31,11 +31,7 @@ import Vue from 'vue'
 import Header from '../components/Header.vue'
 import TaskSheet from '../components/TaskSheet.vue'
 import Dialog from '../components/Dialog.vue'
-
-interface CreateTaskRequest {
-  title: string
-  status: 'TODO' | 'DOING' | 'DONE'
-}
+import type { CreateTaskRequest } from '$/types'
 
 export default Vue.extend({
   components: {
@@ -47,7 +43,7 @@ export default Vue.extend({
     return {
       isLogin: true,
       dialog: false,
-      dialogTaskStatus: 'TODO',
+      dialogTaskStatus: '',
       taskStatusList: [
         {
           status: 'TODO',
@@ -64,33 +60,36 @@ export default Vue.extend({
       ],
       tasks: [
         {
-          id: 1,
-          status: 'TODO',
-          title: 'wake up'
-        },
-        {
-          id: 2,
-          status: 'DOING',
-          title: 'breakfast'
-        },
-        {
-          id: 3,
-          status: 'DONE',
-          title: 'dinner'
-        },
+          id: 0,
+          title: '',
+          status: ''
+        }
       ]
     };
+  },
+  async mounted() {
+    this.tasks = await this.$api.tasks.$get({
+      headers: {
+        Authorization: `Bearer ${this.$store.getters.token}`
+      }
+    })
   },
   methods: {
     filteredTasks(status: string) {
       return this.tasks.filter(task => task.status === status)
     },
-    addTask(task: CreateTaskRequest) {
+    async addTask(task: CreateTaskRequest) {
       this.closeDialog()
 
-      // 今後はAPI通信に変更
+      const newTask = await this.$api.tasks.$post({
+        headers: {
+          Authorization: `Bearer ${this.$store.getters.token}`
+        },
+        body: task
+      })
+
       this.tasks.push({
-        id: new Date().getMilliseconds(),
+        id: newTask.taskId,
         ...task
       })
     },
@@ -101,8 +100,13 @@ export default Vue.extend({
     closeDialog() {
       this.dialog = false
     },
-    deleteTask(id: number) {
-      // 今後はAPI通信に変更
+    async deleteTask(id: number) {
+      await this.$api.tasks._taskId(id).$delete({
+        headers: {
+          Authorization: `Bearer ${this.$store.getters.token}`
+        }
+      })
+
       this.tasks = this.tasks.filter(task => task.id !== id)
     }
   }
