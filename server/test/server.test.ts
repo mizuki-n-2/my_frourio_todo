@@ -3,7 +3,6 @@
 
 test('dependency injection into controller', async () => {
   // let printedMessage = ''
-
   // const injectedController = controller.inject((deps) => ({
   //   getTasks: deps.getTasks.inject({
   //     prisma: {
@@ -23,13 +22,11 @@ test('dependency injection into controller', async () => {
   //     printedMessage = text
   //   }
   // }))(express())
-
   // const limit = 3
   // const message = 'test message'
   // const res = await injectedController.get({
   //   query: { limit, message }
   // })
-
   // expect(res.body).toHaveLength(limit)
   // expect(printedMessage).toBe(message)
 })

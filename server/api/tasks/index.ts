@@ -1,6 +1,6 @@
 import type { Task, TaskStatus } from '$prisma/client'
 import type { CreateTaskRequest, AuthHeader } from '$/types'
- 
+
 export type Methods = {
   get: {
     reqHeaders: AuthHeader

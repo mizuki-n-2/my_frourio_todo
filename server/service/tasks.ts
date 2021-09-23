@@ -5,9 +5,8 @@ import { CreateTaskRequest } from '$/types'
 
 const prisma = new PrismaClient()
 
-export const getTasks = 
-  async (userId: number, status?: TaskStatus) => 
-    await prisma.task.findMany({ where: { userId, status } })
+export const getTasks = async (userId: number, status?: TaskStatus) =>
+  await prisma.task.findMany({ where: { userId, status } })
 
 export const createTask = (userId: number, body: CreateTaskRequest) =>
   body.status === TaskStatus.DONE
@@ -32,7 +31,8 @@ export const updateTask = (id: number, status: TaskStatus) =>
     ? prisma.task.update({
         where: { id },
         data: {
-          status, finishedAt: dayjs().toDate()
+          status,
+          finishedAt: dayjs().toDate()
         }
       })
     : prisma.task.update({
@@ -40,5 +40,4 @@ export const updateTask = (id: number, status: TaskStatus) =>
         data: { status, finishedAt: null }
       })
 
-export const deleteTask = (id: number) =>
-  prisma.task.delete({ where: { id } })
+export const deleteTask = (id: number) => prisma.task.delete({ where: { id } })

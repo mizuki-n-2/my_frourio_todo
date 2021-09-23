@@ -9,12 +9,19 @@ export default defineController(() => ({
       // TODO: 関数名と変数名が合ってなくて気持ち悪い
       const userId = await validateUser(body.email, body.password)
       return userId
-        ? { status: 201, body: { token: jwt.sign({ userId }, process.env.JWT_SECRET ?? 'jwt-secret') } }
-        : { status: 401 } 
+        ? {
+            status: 201,
+            body: {
+              token: jwt.sign(
+                { userId },
+                process.env.JWT_SECRET ?? 'jwt-secret'
+              )
+            }
+          }
+        : { status: 401 }
     } catch (e) {
-      if (e instanceof UserNotFound)
-        return { status: 404 }
-      
+      if (e instanceof UserNotFound) return { status: 404 }
+
       return { status: 500 }
     }
   }

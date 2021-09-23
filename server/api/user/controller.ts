@@ -9,7 +9,7 @@ export default defineController(() => ({
       return { status: 200, body: resUser }
     } catch (e) {
       if (e instanceof UserNotFound) return { status: 404 }
-      
+
       return { status: 500 }
     }
   }
