@@ -53,7 +53,9 @@
             >
               登録
             </v-btn>
-          </div> 
+          </div>
+
+          <NuxtLink to="/" class="d-flex justify-end mt-3">ログインへ</NuxtLink> 
         </v-form>
       </v-card>
     </v-main>
@@ -102,9 +104,13 @@ export default Vue.extend({
             password: this.password
           }
         })
+
+        await this.$store.dispatch('login', { email: this.email, password: this.password })
       } catch (e) {
         
       }
+      
+      this.$router.push('/tasks')
     }
   },
 })

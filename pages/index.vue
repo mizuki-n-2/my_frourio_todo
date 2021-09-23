@@ -39,6 +39,8 @@
               ログイン
             </v-btn>
           </div>
+
+          <NuxtLink to="/register" class="d-flex justify-end mt-3">新規登録へ</NuxtLink>
         </v-form>
       </v-card>
     </v-main>
