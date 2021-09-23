@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <Header></Header>
+    <Header :is-login="isLogin"></Header>
     <v-main class="grey lighten-2">
       <v-container>
         <Dialog 
@@ -45,6 +45,7 @@ export default Vue.extend({
   },
   data() {
     return {
+      isLogin: true,
       dialog: false,
       dialogTaskStatus: 'TODO',
       taskStatusList: [

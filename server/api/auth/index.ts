@@ -1,4 +1,4 @@
-import { LoginBody } from "$/validators";
+import { LoginBody } from '$/validators'
 
 export type Methods = {
   post: {

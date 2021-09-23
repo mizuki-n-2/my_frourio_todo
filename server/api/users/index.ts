@@ -1,4 +1,4 @@
-import { RegisterBody } from "$/validators";
+import { RegisterBody } from '$/validators'
 
 export type Methods = {
   post: {
