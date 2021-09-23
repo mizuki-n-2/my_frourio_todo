@@ -74,14 +74,7 @@ export default Vue.extend({
       if(!(this.$refs.form as Vue & { validate: () => boolean }).validate()) return
 
       try {
-        const res = await this.$api.auth.$post({
-          body: {
-            email: this.email,
-            password: this.password
-          }
-        })
-
-        console.log(res.token)
+        await this.$store.dispatch('login', { email: this.email, password: this.password })
       } catch (e) {
         if(e.response.status === 404)
           window.alert("該当するユーザが存在しません。\nメールアドレスまたはパスワードに間違いがないか確認してもう一度お試しください！")
