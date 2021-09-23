@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <Header :is-login="isLogin"></Header>
+    <Header :is-login="isLogin" @logout="logout"></Header>
     <v-main class="grey lighten-2">
       <v-container>
         <Dialog 
@@ -108,6 +108,10 @@ export default Vue.extend({
       })
 
       this.tasks = this.tasks.filter(task => task.id !== id)
+    },
+    logout() {
+      this.$store.dispatch('logout')
+      this.$router.push('/')
     }
   }
 })

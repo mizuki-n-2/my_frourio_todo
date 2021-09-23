@@ -27,6 +27,7 @@
     <v-icon
       v-if="isLogin"
       color="white"
+      @click="emitLogout"
     >
       mdi-logout
     </v-icon>
@@ -50,6 +51,11 @@ export default Vue.extend({
         'カンバンボード'
       ] 
     };
+  },
+  methods: {
+    emitLogout() {
+      this.$emit('logout')
+    }
   }
 })
 </script>

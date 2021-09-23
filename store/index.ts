@@ -11,7 +11,8 @@ export const getters: GetterTree<RootState, RootState> = {
 }
 
 export const mutations: MutationTree<RootState> = {
-  SET_TOKEN: (state, newToken: string) => (state.token = newToken)
+  SET_TOKEN: (state, newToken: string) => (state.token = newToken),
+  REMOVE_TOKEN: (state) => (state.token = '')
 }
 
 export const actions: ActionTree<RootState, RootState> = {
@@ -24,5 +25,8 @@ export const actions: ActionTree<RootState, RootState> = {
     })
 
     commit('SET_TOKEN', res.token)
+  },
+  logout({ commit }) {
+    commit('REMOVE_TOKEN')
   }
 }
