@@ -13,7 +13,7 @@
       <v-list-item-icon>
         <v-icon 
           large
-          @click="emitDeleteTask(task.id)"
+          @click="emitDeleteTask"
         >
           mdi-delete-forever
         </v-icon>
@@ -37,9 +37,15 @@ export default Vue.extend({
     }
   },
   methods: {
-    emitDeleteTask(id: number) {
-      this.$emit('emitDeleteTask', id)
+    emitDeleteTask() {
+      this.$emit('deleteTask', { id: this.task.id, status: this.task.status })
     }
   }
 })
 </script>
+
+<style scoped>
+.card {
+  z-index: 10;
+}
+</style>

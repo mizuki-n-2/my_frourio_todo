@@ -1,13 +1,10 @@
-<template>
-  <v-col
-    cols="12"
-    sm="4"
-  >
+<template> 
+  <v-col cols="12" sm="4">
     <v-sheet
       min-height="85vh"
       rounded="lg"
     >
-      <div :class="`sheet-title bg-${color}`">
+      <div class="sheet-title" :style="`background-color: ${color}`">
         <div></div>
         <h3>{{ status }}</h3>
         <v-icon
@@ -18,37 +15,24 @@
         </v-icon>
       </div>
 
-      <draggable v-model="tasks" draggable=".task" group="tasks" @change="changeTaskStatus">
-        <task-card
-          v-for="task in tasks"
-          :key="task.id"
-          :task="task"
-          class="task"
-          @emitDeleteTask="emitDeleteTask"
-        ></task-card>
-      </draggable>
-
+      <div class="mx-2">
+        <slot name="body"></slot>
+      </div>
     </v-sheet>
   </v-col>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import draggable from 'vuedraggable'
-import TaskCard from './TaskCard.vue'
 
 export default Vue.extend({
   name: 'TaskSheet',
-  components: {
-    TaskCard,
-    draggable
-  },
   props: {
-    status: { 
+    status: {
       type: String,
       default: 'TODO'
     },
-    color: { 
+    color: {
       type: String,
       default: 'red'  
     },
@@ -64,16 +48,6 @@ export default Vue.extend({
   methods: {
     emitOpenDialog(status: string) {
       this.$emit('openDialog', status)
-    },
-    emitDeleteTask(id: number) {
-      this.$emit('deleteTask', id)
-    },
-    changeTaskStatus(event: any) {
-      if(event.added) {
-        const id = event.added.element.id
-        const status = this.status
-        this.$emit('changeTaskStatus', {id, status})
-      }
     }
   }
 })
@@ -87,17 +61,5 @@ export default Vue.extend({
   height: 50px;
   line-height: 50px;
   color: white;
-}
-
-.bg-red {
-  background-color: red;
-}
-
-.bg-green {
-  background-color: green;
-}
-
-.bg-black {
-  background-color: black;
 }
 </style>
