@@ -18,12 +18,15 @@
         </v-icon>
       </div>
 
-      <task-card
-        v-for="task in tasks"
-        :key="task.id"
-        :task="task"
-        @emitDeleteTask="emitDeleteTask"
-      ></task-card>
+      <draggable v-model="tasks" draggable=".task" group="tasks" @change="changeTaskStatus">
+        <task-card
+          v-for="task in tasks"
+          :key="task.id"
+          :task="task"
+          class="task"
+          @emitDeleteTask="emitDeleteTask"
+        ></task-card>
+      </draggable>
 
     </v-sheet>
   </v-col>
@@ -31,12 +34,14 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import draggable from 'vuedraggable'
 import TaskCard from './TaskCard.vue'
 
 export default Vue.extend({
   name: 'TaskSheet',
   components: {
-    TaskCard
+    TaskCard,
+    draggable
   },
   props: {
     status: { 
@@ -62,6 +67,13 @@ export default Vue.extend({
     },
     emitDeleteTask(id: number) {
       this.$emit('deleteTask', id)
+    },
+    changeTaskStatus(event: any) {
+      if(event.added) {
+        const id = event.added.element.id
+        const status = this.status
+        this.$emit('changeTaskStatus', {id, status})
+      }
     }
   }
 })

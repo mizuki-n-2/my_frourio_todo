@@ -17,6 +17,7 @@
                   v-model="title"
                   label="タスク名"
                   required
+                  @keydown.enter="emitAddTask"
                 ></v-text-field>
               </v-col>
               <v-col cols="12">

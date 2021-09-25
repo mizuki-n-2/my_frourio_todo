@@ -19,6 +19,7 @@
             :tasks="filteredTasks(item.status)"
             @openDialog="openDialog"
             @deleteTask="deleteTask"
+            @changeTaskStatus="changeTaskStatus"
           ></task-sheet>
         </v-row>
       </v-container>
@@ -32,6 +33,12 @@ import Header from '../components/Header.vue'
 import TaskSheet from '../components/TaskSheet.vue'
 import Dialog from '../components/Dialog.vue'
 import type { CreateTaskRequest } from '$/types'
+import TaskStatus from '$prisma/client'
+
+interface updateTaskInfo {
+  id: number
+  status: TaskStatus.TaskStatus
+}
 
 export default Vue.extend({
   components: {
@@ -115,6 +122,20 @@ export default Vue.extend({
       })
 
       this.tasks = this.tasks.filter(task => task.id !== id)
+    },
+    async changeTaskStatus(taskInfo: updateTaskInfo) {
+      try {
+        await this.$api.tasks._taskId(taskInfo.id).$patch({
+          headers: {
+            Authorization: `Bearer ${this.$store.getters.token}`
+          },
+          body: {
+            status: taskInfo.status
+          }
+        })
+      } catch (e) {
+        
+      }
     },
     logout() {
       this.$store.dispatch('logout')
