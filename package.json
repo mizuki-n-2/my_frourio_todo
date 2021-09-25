@@ -51,6 +51,7 @@
     "frourio-express": "^0.25.1",
     "nuxt": "^2.15.4",
     "prisma": "^2.21.2",
+    "vuedraggable": "^2.24.3",
     "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
