@@ -8,7 +8,7 @@ const API_USER_PASS = process.env.API_USER_PASS ?? ''
 const API_SERVER_PORT = +(
   process.env.PORT ??
   process.env.API_SERVER_PORT ??
-  '8080'
+  '5000'
 )
 const API_BASE_PATH = process.env.API_BASE_PATH ?? ''
 const API_ORIGIN = process.env.API_ORIGIN ?? ''
