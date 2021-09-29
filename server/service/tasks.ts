@@ -1,18 +1,19 @@
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
-dayjs.extend(utc)
-dayjs.extend(timezone)
 import { PrismaClient } from '@prisma/client'
 import { TaskStatus } from '$prisma/client'
 import { CreateTaskRequest } from '$/types'
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 const prisma = new PrismaClient()
 
 export const getTasks = async (userId: number, status?: TaskStatus) =>
   await prisma.task.findMany({ where: { userId, status } })
 
-export const createTask = (userId: number, body: CreateTaskRequest) => 
+export const createTask = (userId: number, body: CreateTaskRequest) =>
   body.status === TaskStatus.DONE
     ? prisma.task.create({
         data: {
