@@ -6,7 +6,7 @@ RUN mkdir /src/server
 WORKDIR /src
 
 COPY /server/package.json /server/package-lock.json ./server/
-RUN npm install --prefix server && npm install bcrypt --prefix server 
+RUN npm install --prefix server 
 
 COPY . .
 
