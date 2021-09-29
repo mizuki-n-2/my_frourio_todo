@@ -5,6 +5,7 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("API_DATABASE_URL")
+  shadowDatabaseUrl = env("CLEARDB_DATABASE_URL")
 }
 
 model User {
