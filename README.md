@@ -21,3 +21,8 @@ $ yarn start
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+
+### [メモ]
+- FEはNetlifyでホスティング、BEはdockerを使ってherokuにデプロイ
+- 簡単なアプリをお手軽に作れる
