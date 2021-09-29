@@ -1,0 +1,16 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+    - "8080:8080"
+    depends_on:
+      - db
+    links:
+      - db
+
+  db:
+    image: mysql
+    ports:
+    - 3306:3306
+    
