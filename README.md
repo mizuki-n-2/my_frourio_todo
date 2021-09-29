@@ -1,4 +1,7 @@
-# Nuxt.js project
+# my frourio todo
+TypeScriptフルスタック環境がとても簡単に作れるフレームワーク「[frourio](https://github.com/frouriojs/frourio)」を使ったカンバンボード式のTODOアプリ。
+
+https://my-frourio-todo.netlify.app/
 
 ## Build Setup
 
