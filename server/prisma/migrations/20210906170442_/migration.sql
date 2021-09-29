@@ -16,7 +16,7 @@ CREATE TABLE `user` (
 
     UNIQUE INDEX `user.email_unique`(`email`),
     PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- CreateTable
 CREATE TABLE `task` (
@@ -30,7 +30,7 @@ CREATE TABLE `task` (
 
     INDEX `user_id`(`user_id`),
     PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- AddForeignKey
 ALTER TABLE `task` ADD FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

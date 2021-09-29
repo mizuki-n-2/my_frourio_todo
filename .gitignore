@@ -95,3 +95,6 @@ server/**/*.db
 server/index.js
 server/.upload
 server/upload/
+
+# mysql
+mysql/mysql.env
